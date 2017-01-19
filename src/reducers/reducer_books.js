@@ -1,8 +1,8 @@
 export default function() {
   return [
-    {title: 'hello there'},
-    {title: 'some good morney'},
-    {title: 'dinner at larrys'},
-    {title: 'broadside in reverse'}
+    {title: 'hello there', pages: 101},
+    {title: 'some good morney', pages: 1},
+    {title: 'dinner at larrys', pages: 10},
+    {title: 'broadside in reverse', pages: 501}
   ]
 }
