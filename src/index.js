@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import SearchBar from './components/searchBar'
@@ -17,20 +18,27 @@ class App extends Component {
       videos: [],
       selectedVideo: null
     };
-
-    YTSearch({key: API_Key, term: 'swift iOS'}, (videos) => {
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      }); // = {videos: videos}
-    });
-
+    this.videoSearch('react redux')
   }
 
+
+  videoSearch(term) {
+
+      YTSearch({key: API_Key, term: term}, (videos) => {
+        this.setState({
+          videos: videos,
+          selectedVideo: videos[0]
+        }); // = {videos: videos}
+      });
+
+    }
+
+
   render() {
+    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300)
     return (
       <div>
-        <SearchBar/>
+        <SearchBar onSearchTermChange = {videoSearch}/>
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}
